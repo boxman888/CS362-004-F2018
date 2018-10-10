@@ -1,3 +1,8 @@
 *.o
 *.gcno
 *.gcda
+projects/morrissz/dominion/playdom
+projects/morrissz/dominion/playdom.dSYM/Contents/Resources/DWARF/playdom
+projects/morrissz/dominion/player.dSYM/Contents/Resources/DWARF/player
+projects/morrissz/dominion/player
+projects/morrissz/dominion/playdom.dSYM/Contents/Resources/DWARF/playdom
