@@ -18,7 +18,32 @@ void playSmithy(int *player, struct gameState *state, int *handpos) {
   // discard card from hand
   discardCard(*handpos, *player, state, 1);
 }
-void playAdventurer();
+void playAdventurer(int *drawntreasure, struct gameState *state, int *currentPlayer,
+                    int *cardDrawn, int *z, int temphand[]) {
+  while (*drawntreasure < 2) {
+    if (state->deckCount[*currentPlayer] <
+        1) {  // if the deck is empty we need to shuffle discard and add to
+              // deck
+      shuffle(*currentPlayer, state);
+    }
+    drawCard(*currentPlayer, state);
+
+    // top card of hand is most recently drawn card.
+    *cardDrawn = state->hand[*currentPlayer] [state->handCount[*currentPlayer] - 1];
+    if (*cardDrawn == copper || *cardDrawn == silver || *cardDrawn == gold)
+      *drawntreasure++;
+    else {
+      temphand[*z] = *cardDrawn;
+      state->handCount[*currentPlayer]--; // BUG: should be decremented
+      *z++;
+    }
+  }
+  while (*z - 1 >= 0) {
+    state->discard[*currentPlayer][state->discardCount[*currentPlayer]++] =
+        temphand[*z - 1];  // discard all cards in play that have been drawn
+    *z = *z - 1;
+  }
+}
 void playVillage();
 void playOutpost();
 void playEmbargo();
@@ -665,32 +690,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3,
   // uses switch to select card and perform actions
   switch (card) {
     case adventurer:
-      while (drawntreasure < 2) {
-        if (state->deckCount[currentPlayer] <
-            1) {  // if the deck is empty we need to shuffle discard and add to
-                  // deck
-          shuffle(currentPlayer, state);
-        }
-        drawCard(currentPlayer, state);
-        cardDrawn =
-            state->hand[currentPlayer]
-                       [state->handCount[currentPlayer] -
-                        1];  // top card of hand is most recently drawn card.
-        if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
-          drawntreasure++;
-        else {
-          temphand[z] = cardDrawn;
-          state->handCount[currentPlayer]--;  // this should just remove the top
-                                              // card (the most recently drawn
-                                              // one).
-          z++;
-        }
-      }
-      while (z - 1 >= 0) {
-        state->discard[currentPlayer][state->discardCount[currentPlayer]++] =
-            temphand[z - 1];  // discard all cards in play that have been drawn
-        z = z - 1;
-      }
+      playAdventurer(&drawntreasure, state, &currentPlayer, &cardDrawn, &z, temphand);
       return 0;
 
     case council_room:

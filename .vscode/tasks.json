@@ -6,7 +6,7 @@
         {
             "label": "Make Dominion",
             "type": "shell",
-            "command": "make -C ${workspaceRoot}/projects/morrissz/dominion/",
+            "command": "make all -C ${workspaceRoot}/projects/morrissz/dominion/",
             "group": {
                 "kind": "build",
                 "isDefault": true
