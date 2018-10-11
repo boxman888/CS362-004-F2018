@@ -21,7 +21,6 @@ void playSmithy(int *player, struct gameState *state, int *handpos) {
   discardCard(*handpos, *player, state, 1);
 }
 
-
 void playAdventurer(int *drawntreasure, struct gameState *state, int *currentPlayer,
                     int *cardDrawn, int *z, int temphand[]) {
   while (*drawntreasure < 2) {
@@ -49,7 +48,6 @@ void playAdventurer(int *drawntreasure, struct gameState *state, int *currentPla
   }
 }
 
-
 void playVillage(int *currentPlayer, struct gameState *state, int *handPos) {
   // @BUG: No bug in this function.
   drawCard(*currentPlayer, state);
@@ -60,7 +58,6 @@ void playVillage(int *currentPlayer, struct gameState *state, int *handPos) {
   // discard played card from hand
   discardCard(*handPos, *currentPlayer, state, 0);
 }
-
 
 void playOutpost(int *currentPlayer, struct gameState *state, int *handPos) {
     // set outpost flag
