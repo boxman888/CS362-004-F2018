@@ -6,8 +6,10 @@
 #include "rngs.h"
 
 // refactored functions
+
+
 void playSmithy(int *player, struct gameState *state, int *handpos) {
-  // BUG: called trash when should only discard
+  // @BUG: called trash when should only discard
 
   //+3 Cards
   int i;
@@ -18,6 +20,8 @@ void playSmithy(int *player, struct gameState *state, int *handpos) {
   // discard card from hand
   discardCard(*handpos, *player, state, 1);
 }
+
+
 void playAdventurer(int *drawntreasure, struct gameState *state, int *currentPlayer,
                     int *cardDrawn, int *z, int temphand[]) {
   while (*drawntreasure < 2) {
@@ -34,7 +38,7 @@ void playAdventurer(int *drawntreasure, struct gameState *state, int *currentPla
       *drawntreasure++;
     else {
       temphand[*z] = *cardDrawn;
-      state->handCount[*currentPlayer]--; // BUG: should be decremented
+      state->handCount[*currentPlayer]++; // @BUG: should be decremented
       *z++;
     }
   }
@@ -44,8 +48,29 @@ void playAdventurer(int *drawntreasure, struct gameState *state, int *currentPla
     *z = *z - 1;
   }
 }
-void playVillage();
-void playOutpost();
+
+
+void playVillage(int *currentPlayer, struct gameState *state, int *handPos) {
+  // @BUG: No bug in this function.
+  drawCard(*currentPlayer, state);
+
+  //+2 Actions
+  state->numActions = state->numActions + 2;
+
+  // discard played card from hand
+  discardCard(*handPos, *currentPlayer, state, 0);
+}
+
+
+void playOutpost(int *currentPlayer, struct gameState *state, int *handPos) {
+    // set outpost flag
+  state->outpostPlayed++;
+
+  // discard card
+  discardCard(*handPos, *currentPlayer, state, 0);
+}
+
+
 void playEmbargo();
 
 int compare(const void *a, const void *b) {
@@ -829,14 +854,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3,
       return 0;
 
     case village:
-      //+1 Card
-      drawCard(currentPlayer, state);
-
-      //+2 Actions
-      state->numActions = state->numActions + 2;
-
-      // discard played card from hand
-      discardCard(handPos, currentPlayer, state, 0);
+      playVillage(&currentPlayer, state, &handPos);
       return 0;
 
     case baron:
@@ -1128,11 +1146,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3,
       return 0;
 
     case outpost:
-      // set outpost flag
-      state->outpostPlayed++;
-
-      // discard card
-      discardCard(handPos, currentPlayer, state, 0);
+      playOutpost(&currentPlayer, state, &handPos);
       return 0;
 
     case salvager:
