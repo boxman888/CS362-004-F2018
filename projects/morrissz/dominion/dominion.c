@@ -49,26 +49,40 @@ void playAdventurer(int *drawntreasure, struct gameState *state, int *currentPla
 }
 
 void playVillage(int *currentPlayer, struct gameState *state, int *handPos) {
-  // @BUG: No bug in this function.
+  // @BUG: Removed two actions instead of adding two into it
   drawCard(*currentPlayer, state);
 
   //+2 Actions
-  state->numActions = state->numActions + 2;
+  state->numActions = state->numActions - 2;
 
   // discard played card from hand
   discardCard(*handPos, *currentPlayer, state, 0);
 }
 
 void playOutpost(int *currentPlayer, struct gameState *state, int *handPos) {
-    // set outpost flag
+  // @BUG: no bug in this function!
+
+  // set outpost flag
   state->outpostPlayed++;
 
   // discard card
   discardCard(*handPos, *currentPlayer, state, 0);
 }
 
+void playSalvager(int *currentPlayer, struct gameState *state, int *handPos, int *choice1) {
+  //+1 buy
+  // @BUG: removed +1 buy statement
 
-void playEmbargo();
+  if (*choice1) {
+    // gain coins equal to trashed card
+    state->coins = state->coins + getCost(handCard(*choice1, state));
+    // trash card
+    discardCard(*choice1, *currentPlayer, state, 1);
+  }
+
+  // discard card
+  discardCard(*handPos, *currentPlayer, state, 0);
+}
 
 int compare(const void *a, const void *b) {
   if (*(int *)a > *(int *)b) return 1;
@@ -1147,18 +1161,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3,
       return 0;
 
     case salvager:
-      //+1 buy
-      state->numBuys++;
-
-      if (choice1) {
-        // gain coins equal to trashed card
-        state->coins = state->coins + getCost(handCard(choice1, state));
-        // trash card
-        discardCard(choice1, currentPlayer, state, 1);
-      }
-
-      // discard card
-      discardCard(handPos, currentPlayer, state, 0);
+      playSalvager(&currentPlayer, state, &handPos, &choice1);
       return 0;
 
     case sea_hag:
