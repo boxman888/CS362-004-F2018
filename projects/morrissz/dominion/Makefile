@@ -34,7 +34,7 @@ player: player.c interface.o
 
 all: playdom player 
 
-tests.out: unittest1.c unittest2.c unittest3.c unittest4.c unittest5.c bst.c compare.c
+tests.out: unittest1.c unittest2.c unittest3.c unittest4.c unittest5.c
 	
 	echo "Result for running BST tests:" > tests.out
 	echo "unittest1.c:" >> tests.out
