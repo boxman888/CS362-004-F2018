@@ -14,3 +14,5 @@ projects/morrissz/dominion/unittest2
 projects/morrissz/dominion/unittest3
 projects/morrissz/dominion/unittest4
 projects/morrissz/dominion/unittest5
+*.plist
+projects/morrissz/dominion/unittest1.dSYM/Contents/Resources/DWARF/unittest1
