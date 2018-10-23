@@ -9,7 +9,7 @@
             "command": "make all -C ${workspaceRoot}/projects/morrissz/dominion/",
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             },
             "problemMatcher": []
         },
@@ -17,6 +17,16 @@
             "label": "Clean Dominion",
             "type": "shell",
             "command": "make clean -C ${workspaceRoot}/projects/morrissz/dominion/",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Make Tests",
+            "type": "shell",
+            "command": "make tests.out -C ${workspaceRoot}/projects/morrissz/dominion/",
             "group": {
                 "kind": "build",
                 "isDefault": true

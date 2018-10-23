@@ -7,7 +7,6 @@
 
 // refactored functions
 
-
 void playSmithy(int *player, struct gameState *state, int *handpos) {
   // @BUG: called trash when should only discard
 
@@ -21,8 +20,9 @@ void playSmithy(int *player, struct gameState *state, int *handpos) {
   discardCard(*handpos, *player, state, 1);
 }
 
-void playAdventurer(int *drawntreasure, struct gameState *state, int *currentPlayer,
-                    int *cardDrawn, int *z, int temphand[]) {
+void playAdventurer(int *drawntreasure, struct gameState *state,
+                    int *currentPlayer, int *cardDrawn, int *z,
+                    int temphand[]) {
   while (*drawntreasure < 2) {
     if (state->deckCount[*currentPlayer] <
         1) {  // if the deck is empty we need to shuffle discard and add to
@@ -32,12 +32,13 @@ void playAdventurer(int *drawntreasure, struct gameState *state, int *currentPla
     drawCard(*currentPlayer, state);
 
     // top card of hand is most recently drawn card.
-    *cardDrawn = state->hand[*currentPlayer] [state->handCount[*currentPlayer] - 1];
+    *cardDrawn =
+        state->hand[*currentPlayer][state->handCount[*currentPlayer] - 1];
     if (*cardDrawn == copper || *cardDrawn == silver || *cardDrawn == gold)
       *drawntreasure++;
     else {
       temphand[*z] = *cardDrawn;
-      state->handCount[*currentPlayer]++; // @BUG: should be decremented
+      state->handCount[*currentPlayer]++;  // @BUG: should be decremented
       *z++;
     }
   }
@@ -69,7 +70,8 @@ void playOutpost(int *currentPlayer, struct gameState *state, int *handPos) {
   discardCard(*handPos, *currentPlayer, state, 0);
 }
 
-void playSalvager(int *currentPlayer, struct gameState *state, int *handPos, int *choice1) {
+void playSalvager(int *currentPlayer, struct gameState *state, int *handPos,
+                  int *choice1) {
   //+1 buy
   // @BUG: removed +1 buy statement
 
@@ -726,7 +728,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3,
   // uses switch to select card and perform actions
   switch (card) {
     case adventurer:
-      playAdventurer(&drawntreasure, state, &currentPlayer, &cardDrawn, &z, temphand);
+      playAdventurer(&drawntreasure, state, &currentPlayer, &cardDrawn, &z,
+                     temphand);
       return 0;
 
     case council_room:
