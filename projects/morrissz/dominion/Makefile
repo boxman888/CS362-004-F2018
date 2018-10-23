@@ -1,4 +1,4 @@
-CFLAGS= -Wall -fpic -coverage -lm -std=c99
+CFLAGS= -Wall -fpic -coverage -std=c99
 
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
@@ -34,7 +34,7 @@ player: player.c interface.o
 
 all: playdom player 
 
-tests.out: unittest1.c unittest2.c unittest3.c unittest4.c unittest5.c
+tests.out: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o
 	
 	echo "Result for running BST tests:" > tests.out
 	echo "unittest1.c:" >> tests.out
@@ -55,11 +55,6 @@ tests.out: unittest1.c unittest2.c unittest3.c unittest4.c unittest5.c
 	echo "unittest4.c:" >> tests.out
 	gcc -o unittest4 unittest4.c $(CFLAGS)
 	./unittest4 >> tests.out
-	# gcov bst.c >> tests.out
-	
-	echo "unittest5.c:" >> tests.out
-	gcc -o unittest5 unittest5.c $(CFLAGS)
-	./unittest5 >> tests.out
 	# gcov bst.c >> tests.out
 
 clean:
