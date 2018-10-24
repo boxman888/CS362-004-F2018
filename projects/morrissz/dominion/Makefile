@@ -42,15 +42,15 @@ tests.out: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs.o
 	./unittest1 >> tests.out
 	
 	echo "unittest2.c:" >> tests.out
-	gcc -o unittest2 unittest2.c dominion.o rngs.o $(CFLAGS)
+	gcc -g -o unittest2 unittest2.c dominion.o rngs.o $(CFLAGS)
 	./unittest2 >> tests.out
 	
 	echo "unittest3.c:" >> tests.out
-	gcc -o unittest3 unittest3.c dominion.o rngs.o $(CFLAGS)
+	gcc -g -o unittest3 unittest3.c dominion.o rngs.o $(CFLAGS)
 	./unittest3 >> tests.out
 	
 	echo "unittest4.c:" >> tests.out
-	gcc -o unittest4 unittest4.c dominion.o rngs.o $(CFLAGS)
+	gcc -g -o unittest4 unittest4.c dominion.o rngs.o $(CFLAGS)
 	./unittest4 >> tests.out
 
 clean:

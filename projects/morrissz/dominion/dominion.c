@@ -411,8 +411,8 @@ int endTurn(struct gameState *state) {
   if (currentPlayer < (state->numPlayers - 1)) {
     state->whoseTurn = currentPlayer + 1;  // Still safe to increment
   } else {
-    state->whoseTurn =
-        0;  // Max player has been reached, loop back around to player 1
+    // Max player has been reached, loop back around to player 1
+    state->whoseTurn = 0;  
   }
 
   state->outpostPlayed = 0;
