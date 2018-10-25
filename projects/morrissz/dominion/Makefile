@@ -36,7 +36,7 @@ all: playdom player
 
 tests.out: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs.o
 	
-	echo "Result for running BST tests:" > tests.out
+	echo "Result for running dominion unit & card tests:" > tests.out
 	echo "unittest1.c:" >> tests.out
 	gcc -g -o unittest1 unittest1.c dominion.o rngs.o $(CFLAGS)
 	./unittest1 >> tests.out
@@ -52,6 +52,14 @@ tests.out: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs.o
 	echo "unittest4.c:" >> tests.out
 	gcc -g -o unittest4 unittest4.c dominion.o rngs.o $(CFLAGS)
 	./unittest4 >> tests.out
+
+	echo "testSmithy.c:" >> tests.out
+	gcc -g -o testSmithy testSmithy.c dominion.o rngs.o $(CFLAGS)
+	./testSmithy >> tests.out
+
+	echo "testAdventurer.c:" >> tests.out
+	gcc -g -o testAdventurer testAdventurer.c dominion.o rngs.o $(CFLAGS)
+	./testAdventurer >> tests.out
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe

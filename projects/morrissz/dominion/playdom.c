@@ -25,16 +25,11 @@ int main (int argc, char** argv) {
     smithyPos = -1;
     adventurerPos = -1;
     for (i = 0; i < numHandCards(&G); i++) {
-      if (handCard(i, &G) == copper)
-    money++;
-      else if (handCard(i, &G) == silver)
-    money += 2;
-      else if (handCard(i, &G) == gold)
-    money += 3;
-      else if (handCard(i, &G) == smithy)
-    smithyPos = i;
-      else if (handCard(i, &G) == adventurer)
-    adventurerPos = i;
+      if (handCard(i, &G) == copper) money++;
+      else if (handCard(i, &G) == silver) money += 2;
+      else if (handCard(i, &G) == gold) money += 3;
+      else if (handCard(i, &G) == smithy) smithyPos = i;
+      else if (handCard(i, &G) == adventurer) adventurerPos = i;
     }
 
     if (whoseTurn(&G) == 0) {
