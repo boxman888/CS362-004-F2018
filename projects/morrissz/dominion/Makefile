@@ -29,7 +29,7 @@ player: player.c interface.o
 
 all: playdom player unittestresults.out
 
-unittestresults.out: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c cardtest2.c cardtest3.c cardtest4.c dominion.o rngs.o
+unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c cardtest2.c cardtest3.c cardtest4.c dominion.o rngs.o
 	
 	echo "Result for running dominion unit & card tests:" > unittestresults.out
 	printf "\n---- unittest1.c:\n" >> unittestresults.out
