@@ -22,14 +22,18 @@ int main(int argc, char *argv[]) {
 
   int currentPlayer = 0;
   bool pass = 0;
-  int seedValue = rand() % 1000;
-  int cards[10] = {embargo, village, outpost,      salvager, sea_hag,
-                   outpost, smithy,  council_room, baron,    tribute};
+  int seedValue = 1234;
+  int cards[10] = {embargo, ambassador, smithy,       salvager, sea_hag,
+                   remodel, outpost,    council_room, baron,    tribute};
 
   // clear gamestate and initialize game
   struct gameState gs;
   memset(&gs, 0, sizeof(struct gameState));
   initializeGame(2, cards, seedValue, &gs);
+
+  // specifically set numActions/buys to 1
+  gs.numActions = 1;
+  gs.numBuys = 1;
 
   // cache the original variables
   int originalWhoseTurn = gs.whoseTurn;
