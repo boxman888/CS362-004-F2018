@@ -1,7 +1,7 @@
 /*
 unit test 4
 
-tests the shuffle() function
+tests the initializeGame() function
 */
 
 #include <assert.h>
@@ -17,10 +17,8 @@ void testStatus(char *executable, char *testName, bool pass) {
 }
 
 int main(int argc, char *argv[]) {
-  int i;
-  int test_result;
-  int newDeck[MAX_HAND];
   int currentPlayer = 0;
+  bool pass;
   int seedValue = 1234;
   int cards[10] = {embargo, ambassador, outpost,      salvager, sea_hag,
                    remodel, gardens,    council_room, baron,    tribute};
@@ -28,24 +26,34 @@ int main(int argc, char *argv[]) {
   // clear gamestate and initialize game
   struct gameState gs;
   memset(&gs, 0, sizeof(struct gameState));
+
   initializeGame(2, cards, seedValue, &gs);
 
-  for (i = 0; i < gs.deckCount[currentPlayer]; i++) {
-    newDeck[i] = gs.deck[currentPlayer][i];
-  }
+  pass = gs.numPlayers = 2;
+  testStatus(argv[0], "initializeGame() set num players correctly", pass);
 
-  shuffle(currentPlayer, &gs);
+  pass = gs.handCount[currentPlayer] = 5;
+  testStatus(argv[0], "initializeGame() added 5 cards to current players hand", pass);
 
-  // verify that the cards are not in the same order
-  test_result = 0;
-  for (i = 0; i < gs.deckCount[currentPlayer]; i++) {
-    if (newDeck[i] != gs.deck[currentPlayer][i]) {
-      test_result = 1;
-      break;
+  // player 1 should've drawn from deck
+  pass = ((gs.deckCount[0] == 5) && (gs.deckCount[1] == 10));
+  testStatus(argv[0], "initializeGame() created player decks correctly", pass);
+
+  // player 2 should have 3 estate and 7 copper
+  int i;
+  int estateCount = 0;
+  int copperCount = 0;
+  for (i = 0; i < gs.deckCount[1]; i++) {
+    if (gs.deck[1][i] == estate) {
+      estateCount++;
+    } else if (gs.deck[1][i] == copper) {
+      copperCount++;
     }
   }
+  pass = ((copperCount == 7) && (estateCount == 3));
+  testStatus(argv[0], "initializeGame() added the right number of copper and estates", pass);
 
-  testStatus(argv[0], "shuffle() changed the order of the deck", test_result);
+
 
   return 0;
 }
