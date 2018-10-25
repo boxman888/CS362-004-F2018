@@ -8,7 +8,7 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/projects/morrissz/dominion/testVillage",
+            "program": "${workspaceFolder}/projects/morrissz/dominion/testOutpost",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

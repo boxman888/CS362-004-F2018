@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
   bool pass = 0;
   int seedValue = rand() % 1000;
   int cards[10] = {embargo, village, outpost,      salvager, sea_hag,
-                   remodel, smithy,  council_room, baron,    tribute};
+                   outpost, smithy,  council_room, baron,    tribute};
 
   // clear gamestate and initialize game
   struct gameState gs;
@@ -32,15 +32,18 @@ int main(int argc, char *argv[]) {
   initializeGame(2, cards, seedValue, &gs);
 
   // cache the original variables
-  int originalActionCount = gs.numActions;
+  int originalWhoseTurn = gs.whoseTurn;
 
   // change card to village
-  gs.hand[currentPlayer][0] = village;
+  gs.hand[currentPlayer][0] = outpost;
   playCard(0, -1, -1, -1, &gs);
 
-  // verify that it added two actions correctly
-  pass = ((originalActionCount + 1) == gs.handCount[currentPlayer]);
-  testStatus(argv[0], "village added a card to hand correctly", pass);
+  testStatus(argv[0], "outpost played flag was set correctly", (gs.outpostPlayed > 0));
+
+  // outpost should let you have another turn
+  endTurn(&gs);
+  pass = (gs.whoseTurn == originalWhoseTurn);
+  testStatus(argv[0], "outpost should let the player have another turn", pass);
 
   return 0;
 }
