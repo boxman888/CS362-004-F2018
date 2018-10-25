@@ -35,15 +35,15 @@ int main(int argc, char *argv[]) {
 
   // verify that it switched to the other player
   test_result = (gs.whoseTurn != currentPlayer);
-  testStatus(argv[0], "endTurn switched players correctly", test_result);
+  testStatus(argv[0], "endTurn() switched players correctly", test_result);
 
   // check that the player has 5 cards
   test_result = (gs.handCount[gs.whoseTurn] == 5);
-  testStatus(argv[0], "endTurn drew 5 cards for the new player", test_result);
+  testStatus(argv[0], "endTurn() drew 5 cards for the new player", test_result);
 
   // check that num actions and num buys is reset
   test_result = (gs.numActions == 1 && gs.numBuys == 1);
-  testStatus(argv[0], "endTurn reset actions and buys correctly", test_result);
+  testStatus(argv[0], "endTurn() reset actions and buys correctly", test_result);
 
   return 0;
 }

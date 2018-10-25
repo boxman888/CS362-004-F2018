@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
   // set the default values w/ empty gamestate
   returnValue = isGameOver(&gs);
   test_result = (returnValue == 1);
-  testStatus(argv[0], "isGameOver is true by w/ empty gamestate", test_result);
+  testStatus(argv[0], "isGameOver() is true by w/ empty gamestate", test_result);
 
   // set the supply count to 1 for the first five
   // means that there are still enough cards left
@@ -38,13 +38,13 @@ int main(int argc, char *argv[]) {
   }
   returnValue = isGameOver(&gs);
   test_result = (returnValue == 0);
-  testStatus(argv[0], "isGameOver when all card types still available", test_result);
+  testStatus(argv[0], "isGameOver() when all card types still available", test_result);
 
   // set the province count > 0
   gs.supplyCount[province] = 10;
   returnValue = isGameOver(&gs);
   test_result = (returnValue == 0);
-  testStatus(argv[0], "isGameOver when enough provinces still available", test_result);
+  testStatus(argv[0], "isGameOver() when enough provinces still available", test_result);
 
   return 0;
 }
