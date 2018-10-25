@@ -1,5 +1,5 @@
 /*
-test smithy card effect
+test outpost card effect
 */
 
 #include <assert.h>

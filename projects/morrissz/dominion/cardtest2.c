@@ -1,5 +1,5 @@
 /*
-test smithy card effect
+test adventurer card effect
 */
 
 #include <assert.h>
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
   }
   originalHandCount = gs.handCount[currentPlayer];
 
-  // change card to smithy
+  // change card to adventurer
   gs.hand[currentPlayer][0] = adventurer;
   playCard(0, -1, -1, -1, &gs);
 
