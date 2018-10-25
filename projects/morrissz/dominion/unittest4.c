@@ -29,10 +29,10 @@ int main(int argc, char *argv[]) {
 
   initializeGame(2, cards, seedValue, &gs);
 
-  pass = gs.numPlayers = 2;
+  pass = (gs.numPlayers == 2);
   testStatus(argv[0], "initializeGame() set num players correctly", pass);
 
-  pass = gs.handCount[currentPlayer] = 5;
+  pass = (gs.handCount[currentPlayer] == 5);
   testStatus(argv[0], "initializeGame() added 5 cards to current players hand", pass);
 
   // player 1 should've drawn from deck
