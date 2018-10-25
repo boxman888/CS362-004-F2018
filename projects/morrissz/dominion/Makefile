@@ -34,32 +34,41 @@ player: player.c interface.o
 
 all: playdom player 
 
-tests.out: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs.o
+tests.out: unittest1.c unittest2.c unittest3.c unittest4.c testSmithy.c testAdventurer.c testVillage.c testOutpost.c dominion.o rngs.o
 	
 	echo "Result for running dominion unit & card tests:" > tests.out
-	echo "unittest1.c:" >> tests.out
+	printf "\n---- unittest1.c:\n" >> tests.out
 	gcc -g -o unittest1 unittest1.c dominion.o rngs.o $(CFLAGS)
-	./unittest1 >> tests.out
+	-./unittest1 >> tests.out
 	
-	echo "unittest2.c:" >> tests.out
+	printf "\n---- unittest2.c:\n" >> tests.out
 	gcc -g -o unittest2 unittest2.c dominion.o rngs.o $(CFLAGS)
-	./unittest2 >> tests.out
+	-./unittest2 >> tests.out
 	
-	echo "unittest3.c:" >> tests.out
+	printf "\n---- unittest3.c:\n" >> tests.out
 	gcc -g -o unittest3 unittest3.c dominion.o rngs.o $(CFLAGS)
-	./unittest3 >> tests.out
+	-./unittest3 >> tests.out
 	
-	echo "unittest4.c:" >> tests.out
+	printf "\n---- unittest4.c:\n" >> tests.out
 	gcc -g -o unittest4 unittest4.c dominion.o rngs.o $(CFLAGS)
-	./unittest4 >> tests.out
+	-./unittest4 >> tests.out
 
-	echo "testSmithy.c:" >> tests.out
+	printf "\n---- testSmithy.c:\n" >> tests.out
 	gcc -g -o testSmithy testSmithy.c dominion.o rngs.o $(CFLAGS)
-	./testSmithy >> tests.out
+	-./testSmithy >> tests.out
 
-	echo "testAdventurer.c:" >> tests.out
+	printf "\n---- testAdventurer.c:\n" >> tests.out
 	gcc -g -o testAdventurer testAdventurer.c dominion.o rngs.o $(CFLAGS)
-	./testAdventurer >> tests.out
+	-./testAdventurer >> tests.out
+
+	printf "\n---- testVillage.c:\n" >> tests.out
+	gcc -g -o testVillage testVillage.c dominion.o rngs.o $(CFLAGS)
+	-./testVillage >> tests.out
+
+	printf "\n---- testOutpost.c:\n" >> tests.out
+	gcc -g -o testOutpost testOutpost.c dominion.o rngs.o $(CFLAGS)
+	-./testOutpost >> tests.out
+
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
