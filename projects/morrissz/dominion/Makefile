@@ -24,51 +24,49 @@ testAll: dominion.o testSuite.c
 interface.o: interface.h interface.c
 	gcc -c interface.c -g  $(CFLAGS)
 
-runtests: testDrawCard 
-	./testDrawCard &> unittestresult.out
-	gcov dominion.c >> unittestresult.out
-	cat dominion.c.gcov >> unittestresult.out
-
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
-all: playdom player 
+all: playdom player unittestresults.out
 
-tests.out: unittest1.c unittest2.c unittest3.c unittest4.c testSmithy.c testAdventurer.c testVillage.c testOutpost.c dominion.o rngs.o
+unittestresults.out: unittest1.c unittest2.c unittest3.c unittest4.c testSmithy.c testAdventurer.c testVillage.c testOutpost.c dominion.o rngs.o
 	
-	echo "Result for running dominion unit & card tests:" > tests.out
-	printf "\n---- unittest1.c:\n" >> tests.out
+	echo "Result for running dominion unit & card tests:" > unittestresults.out
+	printf "\n---- unittest1.c:\n" >> unittestresults.out
 	gcc -g -o unittest1 unittest1.c dominion.o rngs.o $(CFLAGS)
-	-./unittest1 >> tests.out
+	-./unittest1 >> unittestresults.out
 	
-	printf "\n---- unittest2.c:\n" >> tests.out
+	printf "\n---- unittest2.c:\n" >> unittestresults.out
 	gcc -g -o unittest2 unittest2.c dominion.o rngs.o $(CFLAGS)
-	-./unittest2 >> tests.out
+	-./unittest2 >> unittestresults.out
 	
-	printf "\n---- unittest3.c:\n" >> tests.out
+	printf "\n---- unittest3.c:\n" >> unittestresults.out
 	gcc -g -o unittest3 unittest3.c dominion.o rngs.o $(CFLAGS)
-	-./unittest3 >> tests.out
+	-./unittest3 >> unittestresults.out
 	
-	printf "\n---- unittest4.c:\n" >> tests.out
+	printf "\n---- unittest4.c:\n" >> unittestresults.out
 	gcc -g -o unittest4 unittest4.c dominion.o rngs.o $(CFLAGS)
-	-./unittest4 >> tests.out
+	-./unittest4 >> unittestresults.out
 
-	printf "\n---- testSmithy.c:\n" >> tests.out
+	printf "\n---- testSmithy.c:\n" >> unittestresults.out
 	gcc -g -o testSmithy testSmithy.c dominion.o rngs.o $(CFLAGS)
-	-./testSmithy >> tests.out
+	-./testSmithy >> unittestresults.out
 
-	printf "\n---- testAdventurer.c:\n" >> tests.out
+	printf "\n---- testAdventurer.c:\n" >> unittestresults.out
 	gcc -g -o testAdventurer testAdventurer.c dominion.o rngs.o $(CFLAGS)
-	-./testAdventurer >> tests.out
+	-./testAdventurer >> unittestresults.out
 
-	printf "\n---- testVillage.c:\n" >> tests.out
+	printf "\n---- testVillage.c:\n" >> unittestresults.out
 	gcc -g -o testVillage testVillage.c dominion.o rngs.o $(CFLAGS)
-	-./testVillage >> tests.out
+	-./testVillage >> unittestresults.out
 
-	printf "\n---- testOutpost.c:\n" >> tests.out
+	printf "\n---- testOutpost.c:\n" >> unittestresults.out
 	gcc -g -o testOutpost testOutpost.c dominion.o rngs.o $(CFLAGS)
-	-./testOutpost >> tests.out
+	-./testOutpost >> unittestresults.out
 
+	printf "\n---- gcov results.c:\n" >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe

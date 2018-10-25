@@ -26,7 +26,7 @@
         {
             "label": "Make Tests",
             "type": "shell",
-            "command": "make tests.out -C ${workspaceRoot}/projects/morrissz/dominion/",
+            "command": "make unittestresults.out -C ${workspaceRoot}/projects/morrissz/dominion/",
             "group": {
                 "kind": "build",
                 "isDefault": true
