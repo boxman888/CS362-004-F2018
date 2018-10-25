@@ -1,4 +1,4 @@
-CFLAGS= -Wall -fpic -coverage -std=c99
+CFLAGS= -Wall -fpic -coverage -lm -std=c99
 
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
@@ -65,7 +65,7 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c car
 	-./cardtest4 >> unittestresults.out
 
 	printf "\n---- gcov results.c:\n" >> unittestresults.out
-	gcov dominion.c >> unittestresults.out
+	gcov -b dominion.c >> unittestresults.out
 	cat dominion.c.gcov >> unittestresults.out
 
 clean:

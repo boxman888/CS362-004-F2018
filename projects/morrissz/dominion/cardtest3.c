@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 
   // verify that it added two actions correctly
   pass = ((originalActionCount + 1) == gs.handCount[currentPlayer]);
-  testStatus(argv[0], "village added a card to hand correctly", pass);
+  testStatus(argv[0], "village added an action correctly", pass);
 
   return 0;
 }
