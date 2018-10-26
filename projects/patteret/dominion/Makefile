@@ -29,6 +29,58 @@ runtests: testDrawCard
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
+unittestresults: dominion.o rngs.o
+	gcc -o cardtest1 -g cardtest1.c dominion.o rngs.o $(CFLAGS)
+	gcc -o cardtest2 -g cardtest2.c dominion.o rngs.o $(CFLAGS)
+	gcc -o cardtest3 -g cardtest3.c dominion.o rngs.o $(CFLAGS)
+	gcc -o cardtest4 -g cardtest4.c dominion.o rngs.o $(CFLAGS)
+	gcc -o unittest1 -g unittest1.c dominion.o rngs.o $(CFLAGS)
+	gcc -o unittest2 -g unittest2.c dominion.o rngs.o $(CFLAGS)
+	gcc -o unittest3 -g unittest3.c dominion.o rngs.o $(CFLAGS)
+	gcc -o unittest4 -g unittest4.c dominion.o rngs.o $(CFLAGS)
+	
+	unittest1 >> unittestresults.out
+	gcov unittest1 >> unittestresults.out
+	echo "" >> unittestresults.out
+
+	unittest2 >> unittestresults.out
+	gcov unittest2 >> unittestresults.out
+	echo "" >> unittestresults.out
+	
+	unittest3 >> unittestresults.out
+	gcov unittest3 >> unittestresults.out
+	echo "" >> unittestresults.out
+	
+	unittest4 >> unittestresults.out
+	gcov unittest4 >> unittestresults.out
+	echo "" >> unittestresults.out
+
+	unittest1 >> unittestresults.out
+	gcov unittest1 >> unittestresults.out
+	echo "" >> unittestresults.out
+
+	- cardtest2 >> unittestresults.out
+	gcov cardtest2 >> unittestresults.out
+	echo "$? Segfault occured here" >> unittestresults.out
+	
+	cardtest3 >> unittestresults.out
+	gcov cardtest3 >> unittestresults.out
+	echo "" >> unittestresults.out
+	
+	cardtest4 >> unittestresults.out
+	gcov cardtest4 >> unittestresults.out
+	echo "" >> unittestresults.out
+	
+
+cleanTests:
+	- rm -f unittestresults.out
+	- rm -f unittest1.g*
+	- rm -f unittest2.g*
+	- rm -f unittest3.g*
+	- rm -f unittest4.g*
+	- rm -f *.c.gcov
+	- rm -r *.gcda
+	- rm -r *gcno
 
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
