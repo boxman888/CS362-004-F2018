@@ -1,0 +1,1 @@
+To compile and run he code in this directory type "make" into the terminal without the quotes.

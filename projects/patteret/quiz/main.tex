@@ -1,0 +1,43 @@
+\documentclass[a4paper]{article}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{comment}
+\usepackage{enumitem}
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{randomstring}
+\author{Ethan Patterson(patteret)}
+\begin{document}
+\maketitle
+\pagebreak
+\tableofcontents
+\pagebreak
+\section{Solution Outline}
+\subsection{inputChar}
+After looking at the logic in the if statements I immediately knew that a random test could be formed for this by looking at the ASCII table and randomly generating every character in the range 32 to 126. This works fine but would work more efficiently if I trimmed the range up a bit. I decided not to try to reduce the range because a I also thought it would be a good idea to make input values that the conditional statements did not expect.
+\\[2mm]
+The function works by generating a random number in the stated range, castes it to a character, and then returns it to the master function.
+\\[5mm]
+\subsection{inputString}
+After looking at the conditional statement that is looking for the array of characters. I knew exactly what word it was looking for, in this case reset. However, since this is a random test I decided that I will only statically set part of the word and let a random number be generated to fill the other part of the word. This way the inputString is now a random input.
+\\[2mm]
+The function works by generating a random number in the range 97 to 122, a to z, casts it to a character and assigns it to a single array element, in this case index 4, then returns the string to the master function.
+\\[2mm]
+I want to note that I like to try to avoid using static variables, however, in this case it felt appropriate. I did not want to modify any code outside of these functions, so the idea of allocating memory for this string would not be possible under this constraint due to possible memory leaks caused by not freeing the allocated memory. This is why I made the string for inputString static.
+\end{document}
