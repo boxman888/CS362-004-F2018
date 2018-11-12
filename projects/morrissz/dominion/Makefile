@@ -27,9 +27,9 @@ interface.o: interface.h interface.c
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
-all: playdom player unittestresults.out
+all: playdom player unittestresults
 
-unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c cardtest2.c cardtest3.c cardtest4.c dominion.o rngs.o
+unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c cardtest2.c cardtest3.c cardtest4.c randomtestadventurer.c randomtestcard1.c randomtestcard2.c dominion.o rngs.o
 	
 	echo "Result for running dominion unit & card tests:" > unittestresults.out
 	printf "\n---- unittest1.c:\n" >> unittestresults.out
@@ -63,6 +63,18 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c car
 	printf "\n---- cardtest4.c:\n" >> unittestresults.out
 	gcc -g -o cardtest4 cardtest4.c dominion.o rngs.o $(CFLAGS)
 	-./cardtest4 >> unittestresults.out
+
+	printf "\n---- randomtestadventurer.c:\n" >> unittestresults.out
+	gcc -g -o randomtestadventurer randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+	-./randomtestadventurer >> unittestresults.out
+
+	printf "\n---- randomtestcard1.c:\n" >> unittestresults.out
+	gcc -g -o randomtestcard1 randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	-./randomtestcard1 >> unittestresults.out
+
+	printf "\n---- randomtestcard2.c:\n" >> unittestresults.out
+	gcc -g -o randomtestcard2 randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	-./randomtestcard2 >> unittestresults.out
 
 	printf "\n---- gcov results.c:\n" >> unittestresults.out
 	gcov -b dominion.c >> unittestresults.out
