@@ -12,32 +12,41 @@ test village card effect
 #include "dominion_helpers.h"
 #include "rngs.h"
 
-#define NUM_TESTS 100
-
-void testStatus(char *executable, char *testName, bool pass) {
-  printf("%s - %s result: %d\n", executable, testName, pass);
-}
+#define MAX_TESTS 5000
 
 int main(int argc, char *argv[]) {
   // random seed generator
   srand(time(NULL));
 
-  int i, j;
+  int i;
+  int j = 0;
+  int p = 0;
   int currentPlayer = 0;
-  bool pass = 0;
+  int pass, pass1, pass2;
   int changes;
   int randHandPos;
   int originalActionCount, originalHandCount;
   int seedValue = rand() % 1000;
-  int cards[10] = {embargo, village, outpost,      salvager, sea_hag,
-                   remodel, smithy,  council_room, baron,    tribute};
+  int cards[10];
+  int initGameVal;
 
-  for (j = 0; j < NUM_TESTS; j++) {
+  while (j < MAX_TESTS) {
+    j++;
+
+    // randomize cards
+    cards[0] = village;
+    for (p = 1; p < 10; p++) {
+      cards[p] = rand() % treasure_map;
+    }
 
     // clear gamestate and initialize game
     struct gameState gs;
     memset(&gs, 0, sizeof(struct gameState));
-    initializeGame(2, cards, seedValue, &gs);
+    seedValue = (rand() % 1000) + 1;
+    initGameVal = initializeGame(2, cards, seedValue, &gs);
+    if (initGameVal == -1) {
+      continue;
+    }
 
     // add or subtract a random amount of cards
     changes = rand() % 3;
@@ -62,11 +71,16 @@ int main(int argc, char *argv[]) {
     playCard(0, -1, -1, -1, &gs);
 
     // verify that it added two actions correctly
-    pass = ((originalActionCount + 1) == gs.handCount[currentPlayer]);
-    testStatus(argv[0], "village added an action correctly", pass);
-    pass = (originalHandCount == gs.handCount[currentPlayer]);
-    testStatus(argv[0], "village drew a card correctly", pass);
+    pass1 = ((originalActionCount + 1) == gs.handCount[currentPlayer]);
+    pass2 = (originalHandCount == gs.handCount[currentPlayer]);
+
+    pass = (pass1 && pass2);
+    if (pass) {
+      break;
+    }
   }
+
+  printf("%s village test ran %d iterations and result was: %d\n", argv[0], j, pass);
 
   return 0;
 }

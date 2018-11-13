@@ -8,7 +8,7 @@
             "name": "Debug Dominion",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/projects/morrissz/dominion/randomtestcard1",
+            "program": "${workspaceFolder}/projects/morrissz/dominion/randomtestcard2",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

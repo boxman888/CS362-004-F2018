@@ -45,7 +45,7 @@ randomtestcard2: randomtestcard2.c dominion.o rngs.o
 	gcov -b dominion.c >> randomtestcard2.out
 	cat dominion.c.gcov >> randomtestcard2.out
 
-all: playdom player unittestresults
+all: playdom player unittestresults randomtestadventurer randomtestcard1 randomtestcard2
 
 unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c cardtest2.c cardtest3.c cardtest4.c randomtestadventurer.c randomtestcard1.c randomtestcard2.c dominion.o rngs.o
 	
