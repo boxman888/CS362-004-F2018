@@ -21,10 +21,6 @@ Two additional random sections added:
 
 #define NUM_TESTS 100
 
-void testStatus(char *executable, char *testName, bool pass) {
-  printf("%s - %s result: %d\n", executable, testName, pass);
-}
-
 int main(int argc, char *argv[]) {
 
   int i;
@@ -33,6 +29,7 @@ int main(int argc, char *argv[]) {
   int cardsToDraw;
   int originalHand[MAX_HAND];
   int originalHandCount;
+  int passes = 0;
   int cards[10] = {embargo, ambassador, outpost,      salvager, sea_hag,
                    remodel, smithy,     council_room, baron,    tribute};
 
@@ -71,11 +68,11 @@ int main(int argc, char *argv[]) {
       }
     }
 
-    // verify outputs
-    testStatus(argv[0], "hand has changed since we last drew", pass);
-    testStatus(argv[0], "handCount has increased by two new treasure",
-              ((originalHandCount + 2) == gs.handCount[currentPlayer]));
+    // add to number of tests passed
+    passes += pass;   
   }
+
+  printf("%s - Adventurer tests passed: %d out of %d", argv[0], passes, NUM_TESTS);
 
   return 0;
 }
