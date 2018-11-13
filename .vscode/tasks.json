@@ -32,6 +32,16 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Make Random Test",
+            "type": "shell",
+            "command": "make randomtestcard2 -C ${workspaceRoot}/projects/morrissz/dominion/",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
         }
     ]
 }

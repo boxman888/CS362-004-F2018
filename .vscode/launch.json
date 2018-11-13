@@ -5,16 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(lldb) Launch",
+            "name": "Debug Dominion",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/projects/morrissz/dominion/unittest4",
+            "program": "${workspaceFolder}/projects/morrissz/dominion/randomtestcard2",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "lldb"
+            "MIMode": "lldb",
+            "preLaunchTask": "Make Random Test"
         }
     ]
 }
