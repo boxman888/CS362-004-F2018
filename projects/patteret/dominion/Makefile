@@ -71,6 +71,15 @@ unittestresults: dominion.o rngs.o
 	gcov cardtest4 >> unittestresults.out
 	echo "" >> unittestresults.out
 	
+buildrandtests: dominion.o rngs.o
+	gcc -o randomtestcardadventure -g randomtestcardadventure.c dominion.o rngs.o $(CFLAGS)
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+
+runrandtests:
+	- randomtestcardadventure > randomtestadventurer.out
+	randomtestcard1 > randomtestcard1.out
+	randomtestcard2 > randomtestcard2.out
 
 cleanTests:
 	- rm -f unittestresults.out
@@ -81,6 +90,8 @@ cleanTests:
 	- rm -f *.c.gcov
 	- rm -r *.gcda
 	- rm -r *gcno
+	- rm -f *.out
+	find . -maxdepth 1 -type f -executable -exec rm {} +
 
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
